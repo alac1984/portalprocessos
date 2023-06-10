@@ -5,7 +5,7 @@ repos:
     -   id: check-yaml
     -   id: trailing-whitespace
 
--   repo: https://gitlab.com/pycqa/flake8
+-   repo: https://github.com/pycqa/flake8
     rev: 3.9.2  # Use the ref you want to point at
     hooks:
     -   id: flake8
@@ -16,6 +16,6 @@ repos:
     -   id: mypy
 
 -   repo: https://github.com/psf/black
-    rev: 21.9b0  # Use the ref you want to point at
+    rev: 23.3.0  # replace with the actual version number
     hooks:
     -   id: black
