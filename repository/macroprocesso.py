@@ -1,6 +1,6 @@
 from typing import Optional
 from sqlalchemy.ext.asyncio import AsyncSession
-from models.macroprocesso import Macroprocesso
+from models.macroprocesso import Macroprocesso, MacroprocessoCreate
 
 
 async def repo_retrieve_macroprocesso(
@@ -9,3 +9,18 @@ async def repo_retrieve_macroprocesso(
     result = await session.get(Macroprocesso, macroprocesso_id)
 
     return result
+
+
+async def repo_create_macroprocesso(
+    macro_create: MacroprocessoCreate, session: AsyncSession
+) -> Macroprocesso:
+    macro = Macroprocesso(
+        nome=macro_create.nome,
+        nome_exibicao=macro_create.nome_exibicao,
+        grupo_id=macro_create.grupo_id,
+    )
+
+    session.add(macro)
+    await session.commit()
+
+    return macro
