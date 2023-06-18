@@ -1,10 +1,10 @@
 from typing import Optional
 from fastapi import APIRouter, Depends
-from models.grupo import Grupo
+from models.grupo import Grupo, GrupoCreate
 from models.macroprocesso import Macroprocesso
 from db.session import get_session
 from sqlalchemy.ext.asyncio import AsyncSession
-from repository.grupo import repo_retrieve_grupo
+from repository.grupo import repo_retrieve_grupo, repo_create_grupo
 from repository.macroprocesso import repo_retrieve_macroprocesso
 
 
@@ -18,6 +18,15 @@ async def retrieve_grupo(
     result = await repo_retrieve_grupo(grupo_id, session)
 
     return result
+
+
+@router.post("/grupos/", response_model=Grupo)
+async def create_grupo(
+    grupo_create: GrupoCreate, session: AsyncSession = Depends(get_session)
+) -> Grupo:
+    grupo = await repo_create_grupo(grupo_create, session)
+
+    return grupo
 
 
 @router.get(
