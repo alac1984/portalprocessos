@@ -13,6 +13,7 @@ from alembic import context
 load_dotenv()
 
 from models.grupo import Grupo
+from models.macroprocesso import Macroprocesso
 
 
 # this is the Alembic Config object, which provides

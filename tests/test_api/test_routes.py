@@ -1,16 +1,39 @@
-from fastapi.testclient import TestClient
-
-from application.main import app
-from models.grupo import Grupo
-
-client = TestClient(app)
+import pytest
+from api.routes import retrieve_grupo
+from api.routes import retrieve_macroprocesso
 
 
-def test_retrieve_grupo(mocker):
+@pytest.mark.asyncio
+async def test_retrieve_grupo_success(test_session):
     grupo_id = 1
-    expected_grupo = Grupo(id=grupo_id, nome="teste", nome_exibicao="Teste")
-    mocker.patch("repository.grupo.repo_retrieve_grupo", return_value=expected_grupo)
 
-    response = client.get("/api/grupo/1")
+    grupo = await retrieve_grupo(grupo_id, test_session)
 
-    assert response.status_code == 200
+    assert grupo.id == 1
+
+
+@pytest.mark.asyncio
+async def test_retrieve_grupo_fail(test_session):
+    grupo_id = 999
+
+    grupo = await retrieve_grupo(grupo_id, test_session)
+
+    assert grupo is None
+
+
+@pytest.mark.asyncio
+async def test_retrieve_macroprocesso_success(test_session):
+    macroprocesso_id = 1
+
+    macroprocesso = await retrieve_macroprocesso(macroprocesso_id, test_session)
+
+    assert macroprocesso.id == 1
+
+
+@pytest.mark.asyncio
+async def test_retrieve_macroprocesso_fail(test_session):
+    macroprocesso_id = 999
+
+    macroprocesso = await retrieve_macroprocesso(macroprocesso_id, test_session)
+
+    assert macroprocesso is None
