@@ -22,7 +22,7 @@ async def test_session():
     async with async_session() as session:
         grupo1 = Grupo(id=1, nome="grupo_teste", nome_exibicao="Grupo de Testes")
         macroprocesso1 = Macroprocesso(
-            id=1, nome="macro_teste", nome_exibicao="Macro de Testes"
+            id=1, nome="macro_teste", nome_exibicao="Macro de Testes", grupo_id=1
         )
         session.add(grupo1)
         session.add(macroprocesso1)
