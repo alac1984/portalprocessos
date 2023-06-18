@@ -30,6 +30,10 @@ pytest-mock = "^3.10.0"
 httpx = "^0.24.1"
 pytest-asyncio = "^0.21.0"
 
+[tool.poetry.group.dev.dependencies]
+pdbpp = "^0.10.3"
+aioconsole = "^0.6.1"
+
 [tool.mypy]
 exclude = [
     'migrations/'
