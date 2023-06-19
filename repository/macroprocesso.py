@@ -35,3 +35,15 @@ async def repo_create_macroprocesso(
     await session.commit()
 
     return macro
+
+
+async def repo_delete_macroprocesso(
+    macroprocesso_id: int, session: AsyncSession
+) -> Optional[Macroprocesso]:
+    macro = await session.get(Macroprocesso, macroprocesso_id)
+
+    if macro is not None:
+        await session.delete(macro)
+        await session.commit()
+
+    return macro

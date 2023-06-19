@@ -24,11 +24,15 @@ async def test_session():
         grupo1 = Grupo(nome="grupo_teste_01", nome_exibicao="Grupo de Testes 01")
         grupo2 = Grupo(nome="grupo_teste_02", nome_exibicao="Grupo de Testes 02")
         macroprocesso1 = Macroprocesso(
-            nome="macro_teste", nome_exibicao="Macro de Testes", grupo_id=1
+            nome="macro_teste_01", nome_exibicao="Macro de Testes 1", grupo_id=1
+        )
+        macroprocesso2 = Macroprocesso(
+            nome="macro_teste_02", nome_exibicao="Macro de Testes 2", grupo_id=1
         )
         session.add(grupo1)
         session.add(grupo2)
         session.add(macroprocesso1)
+        session.add(macroprocesso2)
         await session.commit()
 
         yield session

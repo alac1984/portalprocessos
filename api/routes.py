@@ -14,6 +14,7 @@ from repository.macroprocesso import (
     repo_retrieve_macroprocesso,
     repo_create_macroprocesso,
     repo_retrieve_all_macroprocesso,
+    repo_delete_macroprocesso,
 )
 
 
@@ -83,3 +84,14 @@ async def create_macroprocesso(
     macro = await repo_create_macroprocesso(macro_create, session)
 
     return macro
+
+
+@router.delete(
+    "/macroprocessos/{macroprocesso_id}", response_model=Optional[Macroprocesso]
+)
+async def delete_macroprocesso(
+    macroprocesso_id: int, session: AsyncSession = Depends(get_session)
+) -> Optional[Macroprocesso]:
+    result = await repo_delete_macroprocesso(macroprocesso_id, session)
+
+    return result
