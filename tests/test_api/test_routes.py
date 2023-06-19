@@ -3,9 +3,11 @@ from models.grupo import Grupo
 from models.macroprocesso import Macroprocesso
 from api.routes import retrieve_grupo
 from api.routes import retrieve_macroprocesso
+from api.routes import retrieve_microprocesso
 from api.routes import retrieve_all_grupo
 from api.routes import retrieve_all_macroprocesso
 from api.routes import delete_grupo
+from api.routes import delete_macroprocesso
 
 
 @pytest.mark.asyncio
@@ -80,3 +82,39 @@ async def test_retrieve_all_macroprocesso(test_session):
 
     for macro in macros:
         assert isinstance(macro, Macroprocesso)
+
+
+@pytest.mark.asyncio
+async def test_delete_macroprocesso_success(test_session):
+    macro_id = 2
+
+    macro = await delete_macroprocesso(macro_id, test_session)
+
+    assert macro.id == 2
+
+
+@pytest.mark.asyncio
+async def test_delete_macroprocesso_fail(test_session):
+    macro_id = 999
+
+    macro = await delete_macroprocesso(macro_id, test_session)
+
+    assert macro is None
+
+
+@pytest.mark.asyncio
+async def test_retrieve_microprocesso_success(test_session):
+    micro_id = 1
+
+    micro = await retrieve_microprocesso(micro_id, test_session)
+
+    assert micro.id == 1
+
+
+@pytest.mark.asyncio
+async def test_retrieve_microprocesso_fail(test_session):
+    micro_id = 999
+
+    micro = await retrieve_microprocesso(micro_id, test_session)
+
+    assert micro is None

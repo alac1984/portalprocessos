@@ -5,6 +5,7 @@ from sqlmodel.ext.asyncio.session import AsyncSession
 from sqlalchemy.orm import sessionmaker
 from models.grupo import Grupo  # noqa
 from models.macroprocesso import Macroprocesso  # noqa
+from models.microprocesso import Microprocesso  # noqa
 
 
 @pytest_asyncio.fixture(scope="function")
@@ -29,10 +30,24 @@ async def test_session():
         macroprocesso2 = Macroprocesso(
             nome="macro_teste_02", nome_exibicao="Macro de Testes 2", grupo_id=1
         )
+        microprocesso1 = Microprocesso(
+            nome="micro_teste_01",
+            nome_exibicao="Micro de Testes 1",
+            macroprocesso_id=1,
+            url="dummy1",
+        )
+        microprocesso2 = Microprocesso(
+            nome="micro_teste_02",
+            nome_exibicao="Micro de Testes 2",
+            macroprocesso_id=1,
+            url="dummy2",
+        )
         session.add(grupo1)
         session.add(grupo2)
         session.add(macroprocesso1)
         session.add(macroprocesso2)
+        session.add(microprocesso1)
+        session.add(microprocesso2)
         await session.commit()
 
         yield session
