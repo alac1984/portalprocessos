@@ -12,6 +12,7 @@ from repository.grupo import (
 from repository.macroprocesso import (
     repo_retrieve_macroprocesso,
     repo_create_macroprocesso,
+    repo_retrieve_all_macroprocesso,
 )
 
 
@@ -54,6 +55,15 @@ async def retrieve_macroprocesso(
     result = await repo_retrieve_macroprocesso(macroprocesso_id, session)
 
     return result
+
+
+@router.get("/macroprocessos", response_model=Optional[list[Macroprocesso]])
+async def retrieve_all_macroprocesso(
+    session: AsyncSession = Depends(get_session),
+) -> Optional[list[Macroprocesso]]:
+    results = await repo_retrieve_all_macroprocesso(session)
+
+    return results
 
 
 @router.post("/macroprocessos", response_model=Macroprocesso)

@@ -1,8 +1,10 @@
 import pytest
 from models.grupo import Grupo
+from models.macroprocesso import Macroprocesso
 from api.routes import retrieve_grupo
 from api.routes import retrieve_macroprocesso
 from api.routes import retrieve_all_grupo
+from api.routes import retrieve_all_macroprocesso
 
 
 @pytest.mark.asyncio
@@ -49,3 +51,13 @@ async def test_retrieve_macroprocesso_fail(test_session):
     macroprocesso = await retrieve_macroprocesso(macroprocesso_id, test_session)
 
     assert macroprocesso is None
+
+
+@pytest.mark.asyncio
+async def test_retrieve_all_macroprocesso(test_session):
+    macros = await retrieve_all_macroprocesso(test_session)
+
+    assert isinstance(macros, list)
+
+    for macro in macros:
+        assert isinstance(macro, Macroprocesso)

@@ -4,6 +4,7 @@ from models.macroprocesso import Macroprocesso, MacroprocessoCreate
 from repository.macroprocesso import (
     repo_create_macroprocesso,
     repo_retrieve_macroprocesso,
+    repo_retrieve_all_macroprocesso,
 )
 
 
@@ -15,6 +16,16 @@ async def test_repo_retrieve_macroprocesso(test_session):
 
     assert isinstance(macro, Macroprocesso)
     assert macro.id == 1
+
+
+@pytest.mark.asyncio
+async def test_repo_retrieve_all_macroprocesso(test_session):
+    macros = await repo_retrieve_all_macroprocesso(test_session)
+
+    assert isinstance(macros, list)
+
+    for macro in macros:
+        assert isinstance(macro, Macroprocesso)
 
 
 @pytest.mark.asyncio
