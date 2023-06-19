@@ -14,6 +14,7 @@ load_dotenv()
 
 from models.grupo import Grupo
 from models.macroprocesso import Macroprocesso
+from models.microprocesso import Microprocesso
 
 
 # this is the Alembic Config object, which provides

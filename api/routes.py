@@ -2,6 +2,7 @@ from typing import Optional
 from fastapi import APIRouter, Depends
 from models.grupo import Grupo, GrupoCreate
 from models.macroprocesso import Macroprocesso, MacroprocessoCreate
+from models.microprocesso import Microprocesso
 from db.session import get_session
 from sqlmodel.ext.asyncio.session import AsyncSession
 from repository.grupo import (
@@ -16,6 +17,7 @@ from repository.macroprocesso import (
     repo_retrieve_all_macroprocesso,
     repo_delete_macroprocesso,
 )
+from repository.microprocesso import repo_retrieve_microprocesso
 
 
 router = APIRouter()
@@ -93,5 +95,14 @@ async def delete_macroprocesso(
     macroprocesso_id: int, session: AsyncSession = Depends(get_session)
 ) -> Optional[Macroprocesso]:
     result = await repo_delete_macroprocesso(macroprocesso_id, session)
+
+    return result
+
+
+@router.get("/microprocessos/{micro_id}", response_model=Optional[Microprocesso])
+async def retrieve_microprocesso(
+    micro_id: int, session: AsyncSession = Depends(get_session)
+) -> Optional[Microprocesso]:
+    result = await repo_retrieve_microprocesso(micro_id, session)
 
     return result
