@@ -25,3 +25,13 @@ async def repo_create_grupo(grupo_create: GrupoCreate, session: AsyncSession) ->
     await session.commit()
 
     return grupo
+
+
+async def repo_delete_grupo(grupo_id: int, session: AsyncSession) -> Optional[Grupo]:
+    grupo = await session.get(Grupo, grupo_id)
+
+    if grupo is not None:
+        await session.delete(grupo)
+        await session.commit()
+
+    return grupo

@@ -5,6 +5,7 @@ from api.routes import retrieve_grupo
 from api.routes import retrieve_macroprocesso
 from api.routes import retrieve_all_grupo
 from api.routes import retrieve_all_macroprocesso
+from api.routes import delete_grupo
 
 
 @pytest.mark.asyncio
@@ -33,6 +34,24 @@ async def test_retrieve_all_grupo(test_session):
 
     for grupo in grupos:
         assert isinstance(grupo, Grupo)
+
+
+@pytest.mark.asyncio
+async def test_delete_grupo_success(test_session):
+    grupo_id = 2
+
+    grupo = await delete_grupo(grupo_id, test_session)
+
+    assert grupo.id == 2
+
+
+@pytest.mark.asyncio
+async def test_delete_grupo_fail(test_session):
+    grupo_id = 999
+
+    grupo = await delete_grupo(grupo_id, test_session)
+
+    assert grupo is None
 
 
 @pytest.mark.asyncio

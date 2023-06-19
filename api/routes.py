@@ -8,6 +8,7 @@ from repository.grupo import (
     repo_retrieve_grupo,
     repo_create_grupo,
     repo_retrieve_all_grupo,
+    repo_delete_grupo,
 )
 from repository.macroprocesso import (
     repo_retrieve_macroprocesso,
@@ -44,6 +45,15 @@ async def create_grupo(
     grupo = await repo_create_grupo(grupo_create, session)
 
     return grupo
+
+
+@router.delete("/grupos/{grupo_id}", response_model=Optional[Grupo])
+async def delete_grupo(
+    grupo_id: int, session: AsyncSession = Depends(get_session)
+) -> Optional[Grupo]:
+    result = await repo_delete_grupo(grupo_id, session)
+
+    return result
 
 
 @router.get(
