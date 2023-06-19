@@ -1,6 +1,7 @@
 import pytest
 from typing import AsyncGenerator
-from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession
+from sqlalchemy.ext.asyncio import AsyncEngine
+from sqlmodel.ext.asyncio.session import AsyncSession
 from db.session import get_database_url, create_engine, get_session
 
 
