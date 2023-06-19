@@ -3,8 +3,12 @@ from fastapi import APIRouter, Depends
 from models.grupo import Grupo, GrupoCreate
 from models.macroprocesso import Macroprocesso, MacroprocessoCreate
 from db.session import get_session
-from sqlalchemy.ext.asyncio import AsyncSession
-from repository.grupo import repo_retrieve_grupo, repo_create_grupo
+from sqlmodel.ext.asyncio.session import AsyncSession
+from repository.grupo import (
+    repo_retrieve_grupo,
+    repo_create_grupo,
+    repo_retrieve_all_grupo,
+)
 from repository.macroprocesso import (
     repo_retrieve_macroprocesso,
     repo_create_macroprocesso,
@@ -23,7 +27,16 @@ async def retrieve_grupo(
     return result
 
 
-@router.post("/grupos/", response_model=Grupo)
+@router.get("/grupos", response_model=Optional[list[Grupo]])
+async def retrieve_all_grupo(
+    session: AsyncSession = Depends(get_session),
+) -> Optional[list[Grupo]]:
+    result = await repo_retrieve_all_grupo(session)
+
+    return result
+
+
+@router.post("/grupos", response_model=Grupo)
 async def create_grupo(
     grupo_create: GrupoCreate, session: AsyncSession = Depends(get_session)
 ) -> Grupo:
@@ -43,10 +56,10 @@ async def retrieve_macroprocesso(
     return result
 
 
-@router.post("/macroprocessos/", response_model=Macroprocesso)
+@router.post("/macroprocessos", response_model=Macroprocesso)
 async def create_macroprocesso(
     macro_create: MacroprocessoCreate, session: AsyncSession = Depends(get_session)
-) -> Grupo:
-    grupo = await repo_create_macroprocesso(macro_create, session)
+) -> Macroprocesso:
+    macro = await repo_create_macroprocesso(macro_create, session)
 
-    return grupo
+    return macro

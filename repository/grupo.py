@@ -1,5 +1,6 @@
 from typing import Optional
-from sqlalchemy.ext.asyncio import AsyncSession
+from sqlmodel import select
+from sqlmodel.ext.asyncio.session import AsyncSession
 from models.grupo import Grupo, GrupoCreate
 
 
@@ -7,6 +8,14 @@ async def repo_retrieve_grupo(grupo_id: int, session: AsyncSession) -> Optional[
     result = await session.get(Grupo, grupo_id)
 
     return result
+
+
+async def repo_retrieve_all_grupo(session: AsyncSession) -> Optional[list[Grupo]]:
+    statement = select(Grupo)
+    results = await session.exec(statement)  # type: ignore
+    grupos = results.all()
+
+    return grupos
 
 
 async def repo_create_grupo(grupo_create: GrupoCreate, session: AsyncSession) -> Grupo:
