@@ -1,6 +1,6 @@
 from typing import Optional
 from sqlmodel.ext.asyncio.session import AsyncSession
-from models.microprocesso import Microprocesso
+from models.microprocesso import Microprocesso, MicroprocessoCreate
 
 
 async def repo_retrieve_microprocesso(
@@ -9,3 +9,19 @@ async def repo_retrieve_microprocesso(
     result = await session.get(Microprocesso, macroprocesso_id)
 
     return result
+
+
+async def repo_create_microprocesso(
+    micro_create: MicroprocessoCreate, session: AsyncSession
+) -> Microprocesso:
+    micro = Microprocesso(
+        nome=micro_create.nome,
+        nome_exibicao=micro_create.nome_exibicao,
+        macroprocesso_id=micro_create.macroprocesso_id,
+        url=micro_create.url,
+    )
+
+    session.add(micro)
+    await session.commit()
+
+    return micro
