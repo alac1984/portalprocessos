@@ -1,4 +1,5 @@
 from typing import Optional
+from sqlmodel import select
 from sqlmodel.ext.asyncio.session import AsyncSession
 from models.microprocesso import Microprocesso, MicroprocessoCreate
 
@@ -25,3 +26,13 @@ async def repo_create_microprocesso(
     await session.commit()
 
     return micro
+
+
+async def repo_retrieve_all_microprocesso(
+    session: AsyncSession,
+) -> Optional[list[Microprocesso]]:
+    statement = select(Microprocesso)
+    results = await session.exec(statement)  # type: ignore
+    microprocessos = results.all()
+
+    return microprocessos

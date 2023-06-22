@@ -4,6 +4,7 @@ from models.microprocesso import Microprocesso, MicroprocessoCreate
 from repository.microprocesso import (
     repo_create_microprocesso,
     repo_retrieve_microprocesso,
+    repo_retrieve_all_microprocesso,
 )
 
 
@@ -24,6 +25,16 @@ async def test_repo_create_microprocesso(test_session):
     micro = await repo_create_microprocesso(micro_create, test_session)
 
     assert isinstance(micro, Microprocesso)
+
+
+@pytest.mark.asyncio
+async def test_repo_retrieve_all_microprocesso(test_session):
+    micros = await repo_retrieve_all_microprocesso(test_session)
+
+    assert isinstance(micros, list)
+
+    for micro in micros:
+        assert isinstance(micro, Microprocesso)
 
 
 # @pytest.mark.asyncio

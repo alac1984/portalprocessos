@@ -20,6 +20,7 @@ from repository.macroprocesso import (
 from repository.microprocesso import (
     repo_retrieve_microprocesso,
     repo_create_microprocesso,
+    repo_retrieve_all_microprocesso,
 )
 
 
@@ -118,3 +119,12 @@ async def create_microprocesso(
     micro = await repo_create_microprocesso(micro_create, session)
 
     return micro
+
+
+@router.get("/microprocessos", response_model=Optional[list[Microprocesso]])
+async def retrieve_all_microprocesso(
+    session: AsyncSession = Depends(get_session),
+) -> Optional[list[Microprocesso]]:
+    results = await repo_retrieve_all_microprocesso(session)
+
+    return results
