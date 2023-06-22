@@ -21,6 +21,7 @@ from repository.microprocesso import (
     repo_retrieve_microprocesso,
     repo_create_microprocesso,
     repo_retrieve_all_microprocesso,
+    repo_delete_microprocesso,
 )
 
 
@@ -128,3 +129,14 @@ async def retrieve_all_microprocesso(
     results = await repo_retrieve_all_microprocesso(session)
 
     return results
+
+
+@router.delete(
+    "/microprocessos/{microprocesso_id}", response_model=Optional[Microprocesso]
+)
+async def delete_microprocesso(
+    microprocesso_id: int, session: AsyncSession = Depends(get_session)
+) -> Optional[Microprocesso]:
+    result = await repo_delete_microprocesso(microprocesso_id, session)
+
+    return result

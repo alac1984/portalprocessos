@@ -36,3 +36,15 @@ async def repo_retrieve_all_microprocesso(
     microprocessos = results.all()
 
     return microprocessos
+
+
+async def repo_delete_microprocesso(
+    microprocesso_id: int, session: AsyncSession
+) -> Optional[Microprocesso]:
+    micro = await session.get(Microprocesso, microprocesso_id)
+
+    if micro is not None:
+        await session.delete(micro)
+        await session.commit()
+
+    return micro

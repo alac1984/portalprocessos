@@ -5,6 +5,7 @@ from repository.microprocesso import (
     repo_create_microprocesso,
     repo_retrieve_microprocesso,
     repo_retrieve_all_microprocesso,
+    repo_delete_microprocesso,
 )
 
 
@@ -37,10 +38,10 @@ async def test_repo_retrieve_all_microprocesso(test_session):
         assert isinstance(micro, Microprocesso)
 
 
-# @pytest.mark.asyncio
-# async def test_repo_delete_macroprocesso(test_session):
-#     macroprocesso_id = 2
+@pytest.mark.asyncio
+async def test_repo_delete_microprocesso(test_session):
+    microprocesso_id = 2
 
-#     macro = await repo_delete_macroprocesso(macroprocesso_id, test_session)
+    micro = await repo_delete_microprocesso(microprocesso_id, test_session)
 
-#     assert isinstance(macro, Macroprocesso)
+    assert isinstance(micro, Microprocesso)
