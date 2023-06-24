@@ -11,7 +11,7 @@ from models.microprocesso import Microprocesso  # noqa
 @pytest_asyncio.fixture(scope="function")
 async def test_session():
     DATABASE_URL = (
-        "postgresql+asyncpg://test_portalprocessos:a1k8u2@localhost:5433"
+        "postgresql+asyncpg://test_portalprocessos:a1k8u2@localhost:5432"
         "/test_portalprocessos"
     )
     engine = create_async_engine(DATABASE_URL, echo=True, future=True)
