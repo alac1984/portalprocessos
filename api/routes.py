@@ -90,6 +90,8 @@ async def create_macroprocesso(
 ) -> Macroprocesso:
     macro = await repo_create_macroprocesso(macro_create, session)
 
+    # TODO: treat error in case grupo_id not present in database (as returned by repo)
+
     return macro
 
 
@@ -118,6 +120,8 @@ async def create_microprocesso(
     micro_create: MicroprocessoCreate, session: AsyncSession = Depends(get_session)
 ) -> Microprocesso:
     micro = await repo_create_microprocesso(micro_create, session)
+
+    # TODO: treat error if macroprocesso_id does not exist in database (as repo returns it)  # noqa
 
     return micro
 

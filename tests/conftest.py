@@ -31,16 +31,10 @@ async def test_session():
             nome="macro_teste_02", nome_exibicao="Macro de Testes 2", grupo_id=1
         )
         microprocesso1 = Microprocesso(
-            nome="micro_teste_01",
-            nome_exibicao="Micro de Testes 1",
-            macroprocesso_id=1,
-            url="dummy1",
+            nome="micro_teste_01", nome_exibicao="Micro de Testes 1", macroprocesso_id=1
         )
         microprocesso2 = Microprocesso(
-            nome="micro_teste_02",
-            nome_exibicao="Micro de Testes 2",
-            macroprocesso_id=1,
-            url="dummy2",
+            nome="micro_teste_02", nome_exibicao="Micro de Testes 2", macroprocesso_id=1
         )
         session.add(grupo1)
         session.add(grupo2)

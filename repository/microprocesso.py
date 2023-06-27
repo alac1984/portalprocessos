@@ -19,8 +19,9 @@ async def repo_create_microprocesso(
         nome=micro_create.nome,
         nome_exibicao=micro_create.nome_exibicao,
         macroprocesso_id=micro_create.macroprocesso_id,
-        url=micro_create.url,
     )
+
+    # TODO: treat IntegrityError if macroprocesso_id does not exist in database
 
     session.add(micro)
     await session.commit()

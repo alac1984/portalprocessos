@@ -40,12 +40,10 @@
 
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="{{ request.url_for('static', path='libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
+    <link rel="stylesheet" href="{{ request.url_for('static', path='vendor/libs/apex-charts/apex-charts.css') }}" />
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ request.url_for('static', path='css/custom.css') }}" />
-
-    <link rel="stylesheet" href="{{ request.url_for('static', path='vendor/libs/apex-charts/apex-charts.css') }}" />
-
     <!-- Page CSS -->
 
     <!-- Helpers -->
@@ -280,5 +278,25 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script>
+      // get all menu items
+      var menuItems = document.querySelectorAll('.menu-item');
+      
+      // add click event listener to all menu items
+      menuItems.forEach(item => {
+        item.addEventListener('click', function(event) {
+          // prevent default link behavior
+          event.preventDefault();
+
+          // remove active class from all menu items
+          menuItems.forEach(i => i.classList.remove('active'));
+
+          // add active class to the clicked menu item
+          this.classList.add('active');
+
+          // Here you can add the logic to fetch and display the content as well
+        });
+      });
+    </script>
   </body>
 </html>

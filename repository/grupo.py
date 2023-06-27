@@ -18,6 +18,16 @@ async def repo_retrieve_all_grupo(session: AsyncSession) -> Optional[list[Grupo]
     return grupos
 
 
+async def repo_retrieve_all_grupo_with_macroprocessos(
+    session: AsyncSession,
+) -> Optional[list[Grupo]]:
+    statement = select(Grupo)
+    results = await session.exec(statement)  # type: ignore
+    grupos = results.all()
+
+    return grupos
+
+
 async def repo_create_grupo(grupo_create: GrupoCreate, session: AsyncSession) -> Grupo:
     grupo = Grupo(nome=grupo_create.nome, nome_exibicao=grupo_create.nome_exibicao)
 

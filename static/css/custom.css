@@ -1,3 +1,12 @@
 .custom-logo {
-  padding: 10px;
+  padding: 10px 5px 10px 0;
+}
+
+.bg-menu-theme .menu-inner > .menu-item.active:before {
+    background: #038ba1;
+}
+
+.bg-menu-theme .menu-inner > .menu-item.active > .menu-link {
+    color: #038ba1;
+    background-color: rgba(3, 139, 161, 0.16) !important;
 }
