@@ -1,6 +1,7 @@
 from typing import Optional
 from sqlmodel import select
 from sqlmodel.ext.asyncio.session import AsyncSession
+from sqlalchemy.orm import selectinload
 from models.grupo import Grupo, GrupoCreate
 
 

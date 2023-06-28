@@ -5,17 +5,39 @@
   </a>
 </li>
 {% for grupo in grupos %}
-  {% if grupo.macroprocessos is None %}
+  {% if grupo.macroprocessos %}
+    <li class="menu-item">
+      <a hx-get={{"grupo/" + grupo.id | string }} hx-target="#content" href="#" class="menu-link menu-toggle">
+        <i class="menu-icon tf-icons bx bx-dock-top"></i>
+        <div data-i18n="{{grupo.nome}}">{{grupo.nome_exibicao}}</div>
+      </a>
+      <ul class="menu-sub">
+        {% for macro in grupo.macroprocessos %}
+        <li class="menu-item">
+          <a hx-get={{"macroprocesso/" + macro.id | string }} hx-target="#content" href="#" class="menu-link">
+            <div data-i18n="{{macro.nome}}">{{macro.nome_exibicao}}</div>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </li>
+  {% else %}
     <li class="menu-item">
       <a hx-get={{"grupo/" + grupo.id | string }} hx-target="#content" href="#" class="menu-link">
         <i class="menu-icon tf-icons bx bx-collection"></i>
         <div data-i18n="{{grupo.nome}}">{{grupo.nome_exibicao}}</div>
       </a>
     </li>
-  {% else %}
-    <div>I'm not None</div>
   {% endif %}
 {% endfor %}
+<script>
+document.querySelectorAll('.menu-link.menu-toggle').forEach(function(element) {
+    element.addEventListener('click', function(event) {
+        event.preventDefault();
+        this.parentNode.classList.toggle('open');
+    });
+});
+</script>
 <!-- <li class="menu-item active"> -->
 <!--   <a hx-get="/dashboard" hx-target="#content" href="#" class="menu-link"> -->
 <!--     <i class="menu-icon tf-icons bx bx-collection"></i> -->

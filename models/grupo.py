@@ -9,7 +9,9 @@ class GrupoBase(SQLModel):
 
 class Grupo(GrupoBase, table=True):  # type: ignore
     id: int = Field(default=None, primary_key=True)
-    macroprocessos: list["Macroprocesso"] = Relationship(back_populates="grupo")  # noqa
+    macroprocessos: list["Macroprocesso"] = Relationship(  # noqa
+        back_populates="grupo", sa_relationship_kwargs={"lazy": "subquery"}
+    )
 
 
 class GrupoCreate(GrupoBase):
