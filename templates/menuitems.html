@@ -13,7 +13,7 @@
       </a>
       <ul class="menu-sub">
         {% for macro in grupo.macroprocessos %}
-        <li class="menu-item">
+          <li id={{"macro" + macro.id | string}} class="menu-item">
           <a hx-get={{"macroprocesso/" + macro.id | string }} hx-target="#content" href="#" class="menu-link">
             <div data-i18n="{{macro.nome}}">{{macro.nome_exibicao}}</div>
           </a>
@@ -30,14 +30,6 @@
     </li>
   {% endif %}
 {% endfor %}
-<script>
-document.querySelectorAll('.menu-link.menu-toggle').forEach(function(element) {
-    element.addEventListener('click', function(event) {
-        event.preventDefault();
-        this.parentNode.classList.toggle('open');
-    });
-});
-</script>
 <!-- <li class="menu-item active"> -->
 <!--   <a hx-get="/dashboard" hx-target="#content" href="#" class="menu-link"> -->
 <!--     <i class="menu-icon tf-icons bx bx-collection"></i> -->
