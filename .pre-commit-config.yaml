@@ -17,6 +17,7 @@ repos:
     hooks:
     -   id: mypy
         exclude: migrations/
+        args: [--config-file=mypy.ini]
 
 -   repo: https://github.com/psf/black
     rev: 23.3.0  # replace with the actual version number

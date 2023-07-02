@@ -35,18 +35,9 @@ pytest-asyncio = "^0.21.0"
 pdbpp = "^0.10.3"
 aioconsole = "^0.6.1"
 
-[tool.mypy]
-exclude = [
-    'migrations/'
-]
-
-[tool.mypy."models.*"]
-
 [tool.flake8]
 max-line-length = 88
-exclude = [
-    'migrations/*'
-]
+exclude = ['migrations/*']
 
 [build-system]
 requires = ["poetry-core"]

@@ -3,7 +3,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from sqlmodel.ext.asyncio.session import AsyncSession
 
-from api.routes import retrieve_all_grupo
+from api.routes import retrieve_all_grupo, retrieve_grupo
 from db.session import get_session
 
 router = APIRouter()
@@ -29,3 +29,13 @@ async def layouts(request: Request):
 @router.get("/dashboard", response_class=HTMLResponse)
 async def dashboard(request: Request):
     return templates.TemplateResponse("dashboard.html", {"request": request})
+
+
+@router.get("/grupo/{grupo_id}", response_class=HTMLResponse)
+async def grupo_detail(
+    request: Request, grupo_id: int, session: AsyncSession = Depends(get_session)
+):
+    grupo = await retrieve_grupo(grupo_id, session)
+    return templates.TemplateResponse(
+        "grupo.html", {"request": request, "grupo": grupo}
+    )
