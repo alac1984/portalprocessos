@@ -3,7 +3,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from sqlmodel.ext.asyncio.session import AsyncSession
 
-from api.routes import retrieve_all_grupo, retrieve_grupo
+from api.routes import retrieve_all_grupo, retrieve_grupo, retrieve_macroprocesso
 from db.session import get_session
 
 router = APIRouter()
@@ -38,4 +38,16 @@ async def grupo_detail(
     grupo = await retrieve_grupo(grupo_id, session)
     return templates.TemplateResponse(
         "grupo.html", {"request": request, "grupo": grupo}
+    )
+
+
+@router.get("/macroprocesso/{macroprocesso_id}", response_class=HTMLResponse)
+async def macroprocesso_detail(
+    request: Request,
+    macroprocesso_id: int,
+    session: AsyncSession = Depends(get_session),
+):
+    macro = await retrieve_macroprocesso(macroprocesso_id, session)
+    return templates.TemplateResponse(
+        "macroprocesso.html", {"request": request, "macro": macro}
     )

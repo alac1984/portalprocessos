@@ -12,7 +12,7 @@ class Macroprocesso(MacroprocessoBase, table=True):  # type: ignore
     id: int = Field(default=None, primary_key=True)
     grupo: list["Grupo"] = Relationship(back_populates="macroprocessos")  # noqa
     microprocessos: list["Microprocesso"] = Relationship(  # noqa
-        back_populates="macroprocesso"
+        back_populates="macroprocesso", sa_relationship_kwargs={"lazy": "subquery"}
     )
 
 
