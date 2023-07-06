@@ -1,9 +1,15 @@
-from fastapi import APIRouter, Request, Depends
+from fastapi import APIRouter, Request, Depends, Form
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from sqlmodel.ext.asyncio.session import AsyncSession
 
-from api.routes import retrieve_all_grupo, retrieve_grupo, retrieve_macroprocesso
+from api.routes import (
+    retrieve_all_grupo,
+    retrieve_grupo,
+    retrieve_macroprocesso,
+    create_grupo,
+)
+from models.grupo import GrupoCreate
 from db.session import get_session
 
 router = APIRouter()
@@ -39,6 +45,32 @@ async def grupo_detail(
     return templates.TemplateResponse(
         "grupo.html", {"request": request, "grupo": grupo}
     )
+
+
+@router.get("/grupo", response_class=HTMLResponse)
+async def grupo_create(request: Request):
+    return templates.TemplateResponse("create_grupo.html", {"request": request})
+
+
+@router.post("/grupo", response_class=HTMLResponse)
+async def grupo_create_post(
+    request: Request,
+    nome: str = Form(...),
+    exibicao: str = Form(...),
+    session: AsyncSession = Depends(get_session),
+):
+    grupo_create = GrupoCreate(nome=nome, nome_exibicao=exibicao)
+    try:
+        await create_grupo(grupo_create, session)
+        toast = {"bg": "custom-toast-success", "message": "Grupo criado com sucesso"}
+    except Exception:
+        toast = {"bg": "custom-toast-error", "message": "Erro na criação do grupo"}
+
+    context = {"request": request, "toast": toast}
+
+    response = templates.TemplateResponse("create_grupo.html", context)
+
+    return response
 
 
 @router.get("/macroprocesso/{macroprocesso_id}", response_class=HTMLResponse)

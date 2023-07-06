@@ -1,4 +1,4 @@
-/* 
+/*
  * All code here should run at startup of the base.html template
  * */
 
@@ -55,10 +55,39 @@ menuSubItems.forEach(item => {
 // get all Grupo with Macro
 var grupoWithMacro = document.querySelectorAll('.menu-link.menu-toggle');
 
-// 
+//
 grupoWithMacro.forEach(function(element) {
     element.addEventListener('click', function(event) {
         event.preventDefault();
         this.parentNode.classList.toggle('open');
     });
 });
+
+// // Toastify
+// document.body.addEventListener('showToast', function(e) {
+//     // Extract messagem from event
+//     let msg = e.headers.get("HX-Message");
+
+//     Toastify({
+//         text: msg,
+//         duration: 3000,
+//         close: true,
+//         gravity: "top", // `top` or `bottom`
+//         position: 'right', // `left`, `center` or `right`
+//         backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+//     }).showToast();
+// });
+
+// document.body.addEventListener('showErrorToast', function(e) {
+//     // Extract error message from event detail
+//     let msg = e.headers.get("HX-Message");
+
+//     Toastify({
+//         text: msg,
+//         duration: 3000,
+//         close: true,
+//         gravity: "top", // `top` or `bottom`
+//         position: 'right', // `left`, `center` or `right`
+//         backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)",
+//     }).showToast();
+// });

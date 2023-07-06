@@ -40,6 +40,7 @@
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="{{ request.url_for('static', path='libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
     <link rel="stylesheet" href="{{ request.url_for('static', path='libs/apex-charts/apex-charts.css') }}" />
+    <link rel="stylesheet" href="{{ request.url_for('static', path='libs/toastify/toastify.min.css') }}" />
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ request.url_for('static', path='css/custom.css') }}" />
@@ -75,7 +76,7 @@
 
           <div class="menu-inner-shadow"></div>
           <!-- Hidden button to load dashboard at load -->
-          
+
           <!-- Menu items -->
 
           <ul class="menu-inner py-1">
@@ -249,6 +250,7 @@
     <script src="{{ request.url_for('static', path='js/bootstrap.js') }}"></script>
     <script src="{{ request.url_for('static', path='libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
     <script src="{{ request.url_for('static', path='libs/htmx/htmx.min.js') }}"></script>
+    <script src="{{ request.url_for('static', path='libs/toastify/toastify.min.js') }}"></script>
     <script src="{{ request.url_for('static', path='js/custom.js') }}"></script>
     <script src="{{ request.url_for('static', path='js/menu.js') }}"></script>
     <!-- endbuild -->

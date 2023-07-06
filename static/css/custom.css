@@ -10,3 +10,31 @@
     color: #038ba1;
     background-color: rgba(3, 139, 161, 0.16) !important;
 }
+
+.custom-toast {
+  position: fixed;
+  opacity: 0;
+  top: 20px;
+  right: 20px;
+  color: white;
+  padding: 10px 40px;
+  z-index: 9999;
+  border-radius: 10px;
+  animation: fade-in-out 4.2s;
+  font-size: 1.3em;
+}
+
+@keyframes fade-in-out {
+  0% {opacity: 0;}
+  16.67% {opacity: 1;}
+  83.33% {opacity: 1;}
+  100% {opacity: 0;}
+}
+
+.custom-toast-error {
+  background: linear-gradient(90deg, hsla(24, 100%, 83%, 1) 0%, hsla(341, 91%, 68%, 1) 100%);
+}
+
+.custom-toast-success {
+  background: linear-gradient(90deg, hsla(167, 68%, 73%, 1) 0%, hsla(178, 59%, 48%, 1) 100%);
+}
