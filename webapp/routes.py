@@ -8,8 +8,10 @@ from api.routes import (
     retrieve_grupo,
     retrieve_macroprocesso,
     create_grupo,
+    create_macroprocesso,
 )
 from models.grupo import GrupoCreate
+from models.macroprocesso import MacroprocessoCreate
 from db.session import get_session
 
 router = APIRouter()
@@ -83,3 +85,44 @@ async def macroprocesso_detail(
     return templates.TemplateResponse(
         "macroprocesso.html", {"request": request, "macro": macro}
     )
+
+
+@router.get("/macroprocesso", response_class=HTMLResponse)
+async def macroprocesso_create(
+    request: Request, session: AsyncSession = Depends(get_session)
+):
+    grupos = await retrieve_all_grupo(session)
+    return templates.TemplateResponse(
+        "create_macro.html", {"request": request, "grupos": grupos}
+    )
+
+
+@router.post("/macroprocesso", response_class=HTMLResponse)
+async def macroprocesso_create_post(
+    request: Request,
+    nome: str = Form(...),
+    exibicao: str = Form(...),
+    grupo: int = Form(...),
+    session: AsyncSession = Depends(get_session),
+):
+    breakpoint()
+    macro_create = MacroprocessoCreate(
+        nome=nome, nome_exibicao=exibicao, grupo_id=grupo
+    )
+    try:
+        await create_macroprocesso(macro_create, session)
+        toast = {
+            "bg": "custom-toast-success",
+            "message": "Macroprocesso criado com sucesso",
+        }
+    except Exception:
+        toast = {
+            "bg": "custom-toast-error",
+            "message": "Erro na criação do macroprocesso",
+        }
+
+    context = {"request": request, "toast": toast}
+
+    response = templates.TemplateResponse("create_macro.html", context)
+
+    return response

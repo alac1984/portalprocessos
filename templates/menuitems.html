@@ -10,6 +10,12 @@
     <div data-i18n="create group">Criar Grupo</div>
   </a>
 </li>
+<li class="menu-item">
+  <a hx-get="/macroprocesso" hx-target="#content" href="#" class="menu-link">
+    <i class="menu-icon tf-icons bx bx-collection"></i>
+    <div data-i18n="create group">Criar Macroprocesso</div>
+  </a>
+</li>
 {% for grupo in grupos %}
   {% if grupo.macroprocessos %}
     <li class="menu-item">

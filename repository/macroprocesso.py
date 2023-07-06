@@ -30,7 +30,6 @@ async def repo_create_macroprocesso(
         nome_exibicao=macro_create.nome_exibicao,
         grupo_id=macro_create.grupo_id,
     )
-
     # TODO: treat IntegrityError in case of grupo_id does not exist in database
 
     session.add(macro)
