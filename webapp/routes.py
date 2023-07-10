@@ -68,11 +68,11 @@ async def grupo_create_post(
     except Exception:
         toast = {"bg": "custom-toast-error", "message": "Erro na criação do grupo"}
 
-    context = {"request": request, "toast": toast}
+    grupos = await retrieve_all_grupo(session)
 
-    response = templates.TemplateResponse("create_grupo.html", context)
+    context = {"request": request, "toast": toast, "grupos": grupos}
 
-    return response
+    return templates.TemplateResponse("menuitems.html", context)
 
 
 @router.get("/macroprocesso/{macroprocesso_id}", response_class=HTMLResponse)
@@ -105,7 +105,6 @@ async def macroprocesso_create_post(
     grupo: int = Form(...),
     session: AsyncSession = Depends(get_session),
 ):
-    breakpoint()
     macro_create = MacroprocessoCreate(
         nome=nome, nome_exibicao=exibicao, grupo_id=grupo
     )
@@ -121,8 +120,7 @@ async def macroprocesso_create_post(
             "message": "Erro na criação do macroprocesso",
         }
 
-    context = {"request": request, "toast": toast}
+    grupos = await retrieve_all_grupo(session)
+    context = {"request": request, "toast": toast, "grupos": grupos}
 
-    response = templates.TemplateResponse("create_macro.html", context)
-
-    return response
+    return templates.TemplateResponse("menuitems.html", context)

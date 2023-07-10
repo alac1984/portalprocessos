@@ -8,8 +8,7 @@
         <h5 class="mb-0">Criar Grupo</h5> <small class="text-muted float-end">Default label</small>
       </div>
       <div class="card-body">
-        {% include 'toast.html' %}
-        <form hx-post="/macroprocesso" hx-trigger="submit" hx-target="#content">
+        <form hx-post="/macroprocesso" hx-target="#menuitems">
           <div class="mb-3">
             <label class="form-label" for="basic-default-fullname">Nome</label>
             <input type="text" name="nome" class="form-control" id="basic-default-fullname" placeholder="Nome do Grupo">
@@ -19,7 +18,7 @@
             <input type="text" name="exibicao" class="form-control" id="basic-default-company" placeholder="Nome a ser exibido">
           </div>
           <div class="mb-3">
-            <select id="select2Basic" class="select2 form-select form-select-lg select2-hidden-accessible" data-allow-clear="true" data-select2-id="select2Basic" tabindex="-1" aria-hidden="true">
+            <select name="grupo" id="select2Basic" class="select2 form-select form-select-lg select2-hidden-accessible" data-allow-clear="true" data-select2-id="select2Basic" tabindex="-1" aria-hidden="true">
               {% for grupo in grupos %}
                 <option value="{{ grupo.id }}" data-select2-id="{{ grupo.id }}">{{ grupo.nome_exibicao }}</option>
               {% endfor %}

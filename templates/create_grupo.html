@@ -8,8 +8,7 @@
         <h5 class="mb-0">Criar Grupo</h5> <small class="text-muted float-end">Default label</small>
       </div>
       <div class="card-body">
-        {% include 'toast.html' %}
-        <form hx-post="/grupo" hx-trigger="submit" hx-target="#content">
+        <form hx-post="/grupo" hx-target="#menuitems">
           <div class="mb-3">
             <label class="form-label" for="basic-default-fullname">Nome</label>
             <input type="text" name="nome" class="form-control" id="basic-default-fullname" placeholder="Nome do Grupo">

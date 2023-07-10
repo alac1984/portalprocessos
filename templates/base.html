@@ -79,7 +79,7 @@
 
           <!-- Menu items -->
 
-          <ul class="menu-inner py-1">
+          <ul class="menu-inner py-1" id="menuitems">
             {% block menuitems %}{% endblock %}
           </ul>
         </aside>
@@ -252,6 +252,7 @@
     <script src="{{ request.url_for('static', path='libs/htmx/htmx.min.js') }}"></script>
     <script src="{{ request.url_for('static', path='libs/toastify/toastify.min.js') }}"></script>
     <script src="{{ request.url_for('static', path='js/custom.js') }}"></script>
+    <script>addMenuEventListeners()</script>
     <script src="{{ request.url_for('static', path='js/menu.js') }}"></script>
     <!-- endbuild -->
 
