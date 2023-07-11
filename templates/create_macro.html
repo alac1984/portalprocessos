@@ -1,4 +1,4 @@
-<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Grupo/</span> Criar Grupo</h4>
+<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Macroprocesso/</span> Criar Macroprocesso</h4>
 
 <!-- Basic Layout -->
 <div class="row">
@@ -18,6 +18,7 @@
             <input type="text" name="exibicao" class="form-control" id="basic-default-company" placeholder="Nome a ser exibido">
           </div>
           <div class="mb-3">
+            <label class="form-label" for="select2Basic">Grupo</label>
             <select name="grupo" id="select2Basic" class="select2 form-select form-select-lg select2-hidden-accessible" data-allow-clear="true" data-select2-id="select2Basic" tabindex="-1" aria-hidden="true">
               {% for grupo in grupos %}
                 <option value="{{ grupo.id }}" data-select2-id="{{ grupo.id }}">{{ grupo.nome_exibicao }}</option>
